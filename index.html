@@ -905,6 +905,38 @@ footer{
   background:rgba(255,255,255,.45);cursor:pointer;transition:.25s;
 }
 .mio-dot.active{background:var(--gold)}
+
+/* ハンバーガーメニュー（スマホ） */
+@media(max-width:768px){
+  .hd-nav{display:none !important}
+  .hd-nav.open{
+    display:flex !important;
+    flex-direction:column;
+    position:fixed;inset:0;
+    background:rgba(8,8,15,.98);
+    justify-content:center;align-items:center;
+    z-index:250;
+    overflow-y:auto;
+  }
+  .hd-nav.open a{
+    display:block;
+    height:auto;line-height:1;
+    padding:20px 48px;
+    font-size:.85rem;
+    border-left:none;
+    border-bottom:1px solid rgba(201,153,62,.14);
+    width:100%;text-align:center;
+    color:rgba(248,245,255,.85);
+    letter-spacing:.2em;
+    background:none;
+  }
+  .hd-nav.open a:hover{color:var(--gold-lt);background:rgba(201,153,62,.05)}
+  .hd-nav.open .cta{
+    background:linear-gradient(135deg,#c9993e,#e0b96a) !important;
+    color:#08080f !important;border:none !important;
+  }
+  .hbg{display:flex !important}
+}
 </style>
 </head>
 <body>
@@ -1424,18 +1456,8 @@ footer{
 
 <script>
   // ハンバーガーメニュー
-  document.getElementById('hbg').addEventListener('click', () => {
-    document.getElementById('gnav').classList.toggle('open');
-  });
-  document.querySelectorAll('#gnav a').forEach(a =>
-    a.addEventListener('click', () => document.getElementById('gnav').classList.remove('open'))
-  );
-
-  // スクロールアニメーション
-  const obs = new IntersectionObserver(es => {
-    es.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
-    });
+  
+  
   }, { threshold: .08 });
   document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 
@@ -1639,29 +1661,31 @@ function mioGoTo(n) {
   </div>
 </div>
 <script>
-  document.getElementById('hbg').addEventListener('click',()=>{
-    document.getElementById('gnav').classList.toggle('open');
+  
+  
+</script>
+
+<script>
+// ハンバーガーメニュー
+(function(){
+  var hbg = document.getElementById('hbg');
+  var nav = document.getElementById('gnav');
+  if(!hbg || !nav) return;
+  hbg.addEventListener('click', function(e){
+    e.stopPropagation();
+    nav.classList.toggle('open');
   });
-  document.querySelectorAll('#gnav a').forEach(a=>
-    a.addEventListener('click',()=>document.getElementById('gnav').classList.remove('open'))
-  );
-  function showDetail(key){
-    document.getElementById('modal-'+key).classList.add('open');
-    document.body.style.overflow='hidden';
-  }
-  function closeDetail(key){
-    document.getElementById('modal-'+key).classList.remove('open');
-    document.body.style.overflow='';
-  }
-  function closeModal(e,key){
-    if(e.target===e.currentTarget) closeDetail(key);
-  }
-  document.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){
-      document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));
-      document.body.style.overflow='';
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('open');
+    });
+  });
+  document.addEventListener('click', function(e){
+    if(!nav.contains(e.target) && !hbg.contains(e.target)){
+      nav.classList.remove('open');
     }
   });
+})();
 </script>
 </body>
 </html>

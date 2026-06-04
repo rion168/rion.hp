@@ -139,6 +139,38 @@ footer{background:var(--bg);padding:40px 48px;border-top:1px solid var(--border)
   .footer-inner{flex-direction:column}
   .sp-bar{display:flex}
 }
+
+/* ハンバーガーメニュー（スマホ） */
+@media(max-width:768px){
+  .hd-nav{display:none !important}
+  .hd-nav.open{
+    display:flex !important;
+    flex-direction:column;
+    position:fixed;inset:0;
+    background:rgba(8,8,15,.98);
+    justify-content:center;align-items:center;
+    z-index:250;
+    overflow-y:auto;
+  }
+  .hd-nav.open a{
+    display:block;
+    height:auto;line-height:1;
+    padding:20px 48px;
+    font-size:.85rem;
+    border-left:none;
+    border-bottom:1px solid rgba(201,153,62,.14);
+    width:100%;text-align:center;
+    color:rgba(248,245,255,.85);
+    letter-spacing:.2em;
+    background:none;
+  }
+  .hd-nav.open a:hover{color:var(--gold-lt);background:rgba(201,153,62,.05)}
+  .hd-nav.open .cta{
+    background:linear-gradient(135deg,#c9993e,#e0b96a) !important;
+    color:#08080f !important;border:none !important;
+  }
+  .hbg{display:flex !important}
+}
 </style>
 </head>
 <body>
@@ -332,7 +364,7 @@ footer{background:var(--bg);padding:40px 48px;border-top:1px solid var(--border)
 <div class="cta-section rv">
   <p class="cta-title">まずはお気軽にご連絡ください</p>
   <div class="cta-btns">
-    <a href="https://lin.ee/uG99EhN" target="_blank" class="btn btn-line">🟢 LINE応募</a>
+    <a href="https://lin.ee/WZU1zbd" target="_blank" class="btn btn-line">🟢 LINE応募</a>
     <a href="tel:050-1720-3094" class="btn btn-gold">📞 電話応募</a>
   </div>
 </div>
@@ -347,7 +379,7 @@ footer{background:var(--bg);padding:40px 48px;border-top:1px solid var(--border)
 
 <!-- SP BAR -->
 <div class="sp-bar">
-  <a href="https://line.me/R/ti/p/@262ikzrb" target="_blank" class="sp-line">🟢 LINE応募</a>
+  <a href="https://lin.ee/WZU1zbd" target="_blank" class="sp-line">🟢 LINE応募</a>
   <a href="tel:050-1720-3094" class="sp-tel">📞 電話応募</a>
 </div>
 
@@ -364,6 +396,29 @@ footer{background:var(--bg);padding:40px 48px;border-top:1px solid var(--border)
       q.closest('.faq-item').classList.toggle('open');
     });
   });
+</script>
+
+<script>
+// ハンバーガーメニュー
+(function(){
+  var hbg = document.getElementById('hbg');
+  var nav = document.getElementById('gnav');
+  if(!hbg || !nav) return;
+  hbg.addEventListener('click', function(e){
+    e.stopPropagation();
+    nav.classList.toggle('open');
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('open');
+    });
+  });
+  document.addEventListener('click', function(e){
+    if(!nav.contains(e.target) && !hbg.contains(e.target)){
+      nav.classList.remove('open');
+    }
+  });
+})();
 </script>
 </body>
 </html>
