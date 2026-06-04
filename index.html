@@ -639,6 +639,8 @@ footer{
 }
 .rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
 .rv.in{opacity:1;transform:translateY(0)}
+/* 万が一JSが動かなくても表示されるように */
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 
 /* ══════════════════════════════════════
@@ -968,7 +970,7 @@ footer{
 
 
 <!-- ══ 本日の出勤セラピスト ══ -->
-<div class="today-slider-section rv">
+<div class="today-slider-section rv in">
   <div class="therapist-slider-head">
     <div class="sec-ornament">
       <span class="orn-line"></span>
@@ -1008,7 +1010,7 @@ footer{
 
 
 <!-- ══ セラピストスライダー ══ -->
-<div class="therapist-slider-section rv">
+<div class="therapist-slider-section rv in">
   <div class="therapist-slider-head">
     <div class="sec-ornament">
       <span class="orn-line"></span>
@@ -1069,7 +1071,7 @@ footer{
 
 
 <!-- ══ 特徴 ══ -->
-<section id="concept" class="sec rv">
+<section id="concept" class="sec rv in">
   <div class="sec-head">
     <div class="sec-ornament">
       <span class="orn-line"></span>
@@ -1110,7 +1112,7 @@ footer{
 
 
 <!-- ══ 料金 ══ -->
-<section id="system" class="sec alt rv">
+<section id="system" class="sec alt rv in">
   <div class="sec-head">
     <div class="sec-ornament">
       <span class="orn-line"></span>
@@ -1198,7 +1200,7 @@ footer{
 
 
 <!-- ══ お知らせ ══ -->
-<section id="news" class="sec rv">
+<section id="news" class="sec rv in">
   <div class="sec-head">
     <div class="sec-ornament">
       <span class="orn-line"></span>
@@ -1244,7 +1246,7 @@ footer{
 
 
 <!-- ══ 注意事項 ══ -->
-<section id="caution" class="sec alt rv">
+<section id="caution" class="sec alt rv in">
   <div class="sec-head">
     <div class="sec-ornament">
       <span class="orn-line"></span>
@@ -1275,7 +1277,7 @@ footer{
 
 
 <!-- ══ アクセス ══ -->
-<section id="access" class="sec rv">
+<section id="access" class="sec rv in">
   <div class="sec-head">
     <div class="sec-ornament">
       <span class="orn-line"></span>
@@ -1317,7 +1319,7 @@ footer{
 
 
 <!-- ══ ご予約 ══ -->
-<section id="contact" class="sec rv">
+<section id="contact" class="sec rv in">
   <div class="sec-head">
     <div class="sec-ornament">
       <span class="orn-line"></span>
@@ -1427,9 +1429,11 @@ footer{
 
 
 <script>
-  // ハンバーガーメニュー
-  
-  
+  // スクロールアニメーション
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
   }, { threshold: .08 });
   document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 
