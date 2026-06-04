@@ -113,25 +113,14 @@ body > *{position:relative;z-index:1}
   letter-spacing:.3em;color:var(--muted);font-weight:400;margin-top:2px;
 }
 
-nav#gnav {display:flex;align-items:center;gap:0}
-nav#gnav a {
-  display:block;height:64px;line-height:64px;
-  padding:0 16px;
-  font-family:var(--roman);font-size:.6rem;letter-spacing:.2em;
-  color:var(--muted);
-  border-left:1px solid var(--border);
-  transition:color .25s,background .25s;
-}
-nav#gnav a:hover{color:var(--gold-lt);background:rgba(201,153,62,.04)}
-nav#gnav .cta {
-  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-lt) 100%);
-  color:#08080f;border-left:none;font-weight:500;
-  letter-spacing:.22em;
-}
-nav#gnav .cta:hover{opacity:.88}
 
-.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:300}
-.hbg span{display:block;width:22px;height:1px;background:var(--gold-lt);transition:.3s}
+
+
+
+
+
+
+
 
 
 /* ══════════════════════════════════════
@@ -825,28 +814,12 @@ footer{
 @media(max-width:768px){
   #hd{padding:0 20px;height:58px}
   .hd-logo img{height:38px;width:38px}
-  nav#gnav{display:none}
-  nav#gnav.open{
-    display:flex;flex-direction:column;gap:0;
-    position:fixed;inset:0;background:rgba(8,8,15,.98);
-    justify-content:center;align-items:center;z-index:150;
-    overflow-y:auto;
-  }
-  nav#gnav.open a{
-    height:auto;padding:22px 48px;line-height:1.4;font-size:.9rem;
-    border-left:none;border-bottom:1px solid var(--border);
-    border-right:none;border-top:none;
-    width:100%;text-align:center;
-    color:var(--white);letter-spacing:.25em;
-    font-family:'Shippori Mincho',serif;
-    background:none;
-  }
-  nav#gnav.open a:hover{color:var(--gold);background:rgba(201,153,62,.05)}
-  nav#gnav.open .cta{
-    background:linear-gradient(135deg,var(--gold) 0%,var(--gold-lt) 100%);
-    color:#08080f;border:none;font-weight:500;
-  }
-  .hbg{display:flex}
+  
+  
+  
+  
+  
+  
   .sec{padding:80px 22px}
   .hero-title{font-size:clamp(1.4rem,4vw,2rem)}
   .features{grid-template-columns:1fr;max-width:380px}
@@ -909,6 +882,96 @@ footer{
 .mio-dot.active{background:var(--gold)}
 
 }
+
+/* ═══ ナビゲーション ═══ */
+#gnav{display:flex;align-items:center;gap:0;list-style:none}
+#gnav a{
+  display:block;height:64px;line-height:64px;
+  padding:0 14px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:.58rem;letter-spacing:.18em;
+  color:rgba(248,245,255,.42);
+  border-left:1px solid rgba(201,153,62,.14);
+  transition:.3s;white-space:nowrap;text-decoration:none;
+}
+#gnav a:hover{color:#e0b96a}
+#gnav a.active{color:#c9993e}
+#gnav a.cta{
+  background:linear-gradient(135deg,#c9993e,#e0b96a);
+  color:#08080f;border-left:none;font-weight:500;
+}
+#gnav a.cta:hover{opacity:.88}
+
+/* ═══ ハンバーガーボタン ═══ */
+.hbg{
+  display:none;
+  flex-direction:column;justify-content:center;gap:6px;
+  cursor:pointer;
+  width:44px;height:44px;
+  padding:8px;
+  z-index:9999;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.hbg span{
+  display:block;width:24px;height:2px;
+  background:#e0b96a;border-radius:2px;
+  transition:.3s;pointer-events:none;
+}
+
+/* ═══ スマホ時のナビ ═══ */
+@media(max-width:768px){
+  /* PC用ナビを非表示 */
+  #gnav{display:none !important}
+
+  /* ハンバーガーボタンを表示 */
+  .hbg{display:flex !important}
+
+  /* 開いた時のメニュー */
+  #gnav.open{
+    display:flex !important;
+    flex-direction:column !important;
+    position:fixed !important;
+    top:0 !important;left:0 !important;right:0 !important;bottom:0 !important;
+    height:100vh !important;
+    background:rgba(8,8,15,.98) !important;
+    justify-content:center !important;
+    align-items:center !important;
+    z-index:9998 !important;
+    gap:0 !important;
+    overflow-y:auto !important;
+    padding:80px 0 40px !important;
+  }
+  #gnav.open a{
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    line-height:1 !important;
+    padding:22px 0 !important;
+    font-size:1rem !important;
+    letter-spacing:.25em !important;
+    text-align:center !important;
+    border-left:none !important;
+    border-bottom:1px solid rgba(201,153,62,.12) !important;
+    color:rgba(248,245,255,.88) !important;
+    background:none !important;
+  }
+  #gnav.open a:last-child{border-bottom:none !important}
+  #gnav.open a:hover,#gnav.open a:active{
+    color:#e0b96a !important;
+    background:rgba(201,153,62,.07) !important;
+  }
+  #gnav.open a.cta{
+    background:linear-gradient(135deg,#c9993e,#e0b96a) !important;
+    color:#08080f !important;
+    border:none !important;
+    font-weight:500 !important;
+    margin-top:16px !important;
+    width:80% !important;
+    border-radius:2px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1778,32 +1841,7 @@ function mioGoTo(n) {
   </div>
 </div>
 
-<script id="nav-js">
-(function(){
-  var btn = document.getElementById('hbg');
-  var nav = document.getElementById('gnav');
-  if(!btn||!nav) return;
-  btn.addEventListener('click', function(e){
-    e.preventDefault();
-    e.stopPropagation();
-    var isOpen = nav.classList.contains('open');
-    nav.classList.toggle('open');
-    document.body.style.overflow = isOpen ? '' : 'hidden';
-  });
-  nav.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){
-      nav.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
-  document.addEventListener('click', function(e){
-    if(nav.classList.contains('open') && !nav.contains(e.target) && !btn.contains(e.target)){
-      nav.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  });
-})();
-</script>
+
 
 <script id="modal-js">
 function showDetail(key){
@@ -1833,5 +1871,53 @@ function mioGoTo(n){
   dots.forEach(function(d,i){d.classList.toggle('active',i===mioIdx);});
 }
 </script>
+
+<script id="nav-js">
+(function(){
+  var btn = document.getElementById('hbg');
+  var nav = document.getElementById('gnav');
+  if(!btn || !nav){ console.warn('nav elements not found'); return; }
+
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var isOpen = nav.classList.contains('open');
+    if(isOpen){
+      nav.classList.remove('open');
+      document.body.style.overflow = '';
+    } else {
+      nav.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // オーバーレイクリックで閉じる
+  document.addEventListener('touchstart', function(e){
+    if(nav.classList.contains('open')){
+      if(!nav.contains(e.target) && !btn.contains(e.target)){
+        nav.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+  }, {passive:true});
+
+  document.addEventListener('click', function(e){
+    if(nav.classList.contains('open')){
+      if(!nav.contains(e.target) && !btn.contains(e.target)){
+        nav.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
